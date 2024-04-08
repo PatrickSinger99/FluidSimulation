@@ -47,6 +47,7 @@ class Display:
 
         # Display particles
         for particle_position in particle_positions:
+            print(particle_position)
             pygame.draw.circle(screen, white, particle_position, radius=2)
 
         # Display simulation infos

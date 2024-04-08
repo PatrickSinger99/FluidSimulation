@@ -1,4 +1,4 @@
-from typing import Tuple, Union
+from typing import Tuple, Union, List
 from random import randint
 
 
@@ -9,7 +9,7 @@ class FluidSimulation:
         self.world_dim = world_dimensions
         self.particle_positions = []
         self.particle_velocities = []
-        self.gravity = 1
+        self.gravity = 0.2
 
         # Add initial fluid particles
         for _ in range(num_of_particles):
@@ -24,8 +24,8 @@ class FluidSimulation:
         if position is None:
             position = (randint(0, self.world_dim[0]), randint(0, self.world_dim[1]))
 
-        self.particle_positions.append(position)
-        self.particle_velocities.append(velocity)
+        self.particle_positions.append(list(position))
+        self.particle_velocities.append(list(velocity))
 
     def update(self):
         """
@@ -37,7 +37,8 @@ class FluidSimulation:
             self.particle_velocities[i][1] += self.gravity
 
             # Update position
-            self.particle_positions[i] += self.particle_velocities[i]
+            self.particle_positions[i][0] += self.particle_velocities[i][0]
+            self.particle_positions[i][1] += self.particle_velocities[i][1]
 
 
     def get_state(self):
